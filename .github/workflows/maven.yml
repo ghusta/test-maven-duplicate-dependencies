@@ -32,7 +32,7 @@ jobs:
           cache: maven
 
       - name: Maven package
-        run: mvn package
+        run: mvn -ntp package
 
       - name: Maven verify
-        run: mvn verify
+        run: mvn -ntp verify
