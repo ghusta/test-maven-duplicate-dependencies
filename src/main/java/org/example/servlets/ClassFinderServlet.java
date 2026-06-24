@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,11 +17,14 @@ import java.util.Enumeration;
 @WebServlet("/class-finder")
 public class ClassFinderServlet extends HttpServlet {
 
+    private static final Logger log = LoggerFactory.getLogger(ClassFinderServlet.class);
+
     @Override
     protected void doGet(
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
+        log.debug("Entering {}.doGet", this.getClass().getName());
 
         response.setContentType("text/html;charset=UTF-8");
 
