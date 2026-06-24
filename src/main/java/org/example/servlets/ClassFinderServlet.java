@@ -25,6 +25,8 @@ public class ClassFinderServlet extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         log.debug("Entering {}.doGet", this.getClass().getName());
+        ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
 
         response.setContentType("text/html;charset=UTF-8");
 
@@ -58,18 +60,20 @@ public class ClassFinderServlet extends HttpServlet {
                 <div class="mt-3 alert alert-info" role="alert">
                     <b><i class="bi bi-info-circle me-2"></i>Version de Java Runtime : %s</b>
                 </div>
+                <div class="mt-3 alert alert-info" role="alert">
+                    <b><i class="bi bi-info-circle me-2"></i>ClassLoader de recherche : %s</b> <i>(%s)</i>
+                </div>
                 <hr/>
-                """ .formatted(System.getProperty("java.version")));
+                """.formatted(System.getProperty("java.version"),
+                contextClassLoader.toString(),
+                contextClassLoader.getClass().getName()));
 
         if (fqcn != null && !fqcn.isBlank()) {
-
             String resource = fqcn.replace('.', '/') + ".class";
 
             out.println("<b><i class=\"bi bi-search me-2 \"></i>Recherche :</b> " + resource + "<br/><br/>");
 
-            ClassLoader cl = Thread.currentThread().getContextClassLoader();
-
-            Enumeration<URL> urls = cl.getResources(resource);
+            Enumeration<URL> urls = contextClassLoader.getResources(resource);
 
             boolean found = false;
             int occurences = 0;
