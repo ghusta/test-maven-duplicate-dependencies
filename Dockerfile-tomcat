@@ -1,0 +1,6 @@
+# See : https://hub.docker.com/_/tomcat/
+FROM tomcat:10.1-jre17-temurin
+
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+
+EXPOSE 8080
