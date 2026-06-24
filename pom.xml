@@ -63,7 +63,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <failBuildInCaseOfEqualContentConflict>false</failBuildInCaseOfEqualContentConflict>
+                    <failBuildInCaseOfEqualContentConflict>true</failBuildInCaseOfEqualContentConflict>
                     <checkCompileClasspath>true</checkCompileClasspath>
                     <checkRuntimeClasspath>true</checkRuntimeClasspath>
                     <checkTestClasspath>false</checkTestClasspath>
